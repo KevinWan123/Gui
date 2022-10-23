@@ -1,4 +1,7 @@
+from gettext import npgettext
 from tkinter import *
+import numpy as np
+import matplotlib.pyplot as plt
 
 root = Tk()
 root.title("DLP Slicer")
@@ -27,6 +30,22 @@ def save():
 	file_name.place(x= 185, y=100)
 	file_name_button = Button(save_window, text= "Save", padx = 20, pady=-10)
 	file_name_button.place(x = 300, y = 100)
+
+def display_3d():
+    fig = plt.figure()
+    ax = fig.add_subplot(projection='3d')
+
+    for idx, slice in enumerate(slices):
+        x = [slice.vertices[:,0]]
+        y = [slice.vertices[:,1]]
+        z = [slice.vertices[:,2]]
+
+    ax.scatter(x, y, z)
+
+
+    ax.grid(True)
+    fig.tight_layout()
+    fig.pack()
 
 #input boxes
 width_label = Label(root, text="Width: ")
