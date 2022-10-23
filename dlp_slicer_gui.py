@@ -86,8 +86,7 @@ button_quit.place(x=0, y=0)
 
 
 
-
-
+#asdasdf
 
 
 
