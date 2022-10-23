@@ -9,6 +9,7 @@ root.geometry("800x500")
 myLabel = Label(text= "DLP Slicer")
 myLabel.pack()
 
+#Contains features for the exit window
 def exit():
     child = Toplevel(root)
     child.geometry("250x150")
@@ -21,6 +22,8 @@ def exit():
     dont_save_button.place(x=86, y=50)
     cancel_button = Button(child, text= "Cancel", command=child.destroy)
     cancel_button.place(x=160, y=50)
+
+#Contains the save button's functionality
 def save():
 	save_window = Toplevel(root)
 	save_window.geometry("500x400")
@@ -31,6 +34,7 @@ def save():
 	file_name_button = Button(save_window, text= "Save", padx = 20, pady=-10)
 	file_name_button.place(x = 300, y = 100)
 
+#This is suppose to display a fixed 3-D Image (still figuring out how to display)
 def display_3d():
     fig = plt.figure()
     ax = fig.add_subplot(projection='3d')
@@ -47,7 +51,7 @@ def display_3d():
     fig.tight_layout()
     fig.pack()
 
-#input boxes
+#Input boxes and labels for width, x-scale, height, y-scale, slices, and z-scale
 width_label = Label(root, text="Width: ")
 width_label.place(x=157, y=250)
 width = Entry(root, width=10)
@@ -82,25 +86,8 @@ z_scale.place(x=530, y=350)
 button_quit = Button(root, text="Exit", command=exit)
 button_quit.place(x=0, y=0)
 
-
-
-
-
-#asdasdfasdfasd
-
-
-
-#Shoving it onto the screen
-#myLabel.grid(row=0, column=0)
-#Creating a button
-def myClick():
-    e.get()
-
 #Slice button
 Slice = Button(root, text="Slice",padx = 15, pady = 5, command=myClick, fg= "blue", bg = "white")
 Slice.place(x=365, y=450)
-
-
-
 
 root.mainloop()
