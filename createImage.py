@@ -2,13 +2,10 @@ from turtle import colormode
 import numpy as np
 import matplotlib.pyplot as plt
 import trimesh
-import meshio
-import skimage
-import mapbox_earcut, psutil
 from timeit import default_timer as timer
 
 def stlImage():
-    name = 'PumpkinKing'
+    name = './ImageSTL/PumpkinKing'
     mymesh = trimesh.load_mesh('{}.stl'.format(name))
 
     vertices = mymesh.vertices
