@@ -36,7 +36,7 @@ def save():
 	file_name_button.place(x = 300, y = 100)
 
 #This is suppose to display a fixed 3-D Image (still figuring out how to display)
-def display_3d():
+def display_3d(name):
 
     mymesh = trimesh.load_mesh('{}.stl'.format(name))
 
@@ -70,7 +70,7 @@ def display_3d():
 
 
     ax.grid(True)
-    fig.tight_layout()
+    #fig.tight_layout()
     fig.pack()
 
 #Input boxes and labels for width, x-scale, height, y-scale, slices, and z-scale
@@ -136,7 +136,7 @@ Slice.place(x=365, y=450)
 #upload button
 
 
-# display_3d()
+display_3d("PumpkinKing")
 
 
 root.mainloop()
