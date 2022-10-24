@@ -4,14 +4,14 @@ import matplotlib.pyplot as plt
 import trimesh
 from timeit import default_timer as timer
 
-def stlImage():
-    name = './ImageSTL/PumpkinKing'
-    mymesh = trimesh.load_mesh('{}.stl'.format(name))
-
+def stlImage(name):
+    mymesh = trimesh.load_mesh('{}'.format(name))
+    title = name.split("/")[-1]
     vertices = mymesh.vertices
     array = np.array(vertices)
     minZ = np.min(array[:,2])
     maxZ = np.max(array[:,2])
+    print(title)
 
 
 
@@ -48,7 +48,7 @@ def stlImage():
 
 
     ax.grid(False)
-    ax.set_title(name)
+    ax.set_title(title)
     ax.set_zlabel('Z')
     fig.tight_layout()
     #Saves this into ImageSTL
@@ -57,6 +57,6 @@ def stlImage():
 
 start = timer()
 
-stlImage()
+#stlImage()
 end = timer()
 print(end-start)
