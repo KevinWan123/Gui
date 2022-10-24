@@ -2,6 +2,7 @@ from gettext import npgettext
 from tkinter import *
 import numpy as np
 import matplotlib.pyplot as plt
+import trimesh as trimesh
 
 root = Tk()
 root.title("DLP Slicer")
@@ -36,6 +37,27 @@ def save():
 
 #This is suppose to display a fixed 3-D Image (still figuring out how to display)
 def display_3d():
+
+    mymesh = trimesh.load_mesh('{}.stl'.format(name))
+
+    vertices = mymesh.vertices
+    array = np.array(vertices)
+    minZ = np.min(array[:,2])
+    maxZ = np.max(array[:,2])
+
+    mymesh.show()
+
+    slices = []
+
+    for z in np.linspace(minZ, maxZ, 40):
+        print(z)
+    l = mymesh.section(plane_origin=[0, 0, z], 
+                     plane_normal=[0,0,1])
+
+    slices.append(l)
+    slices = [slice for slice in slices if slice is not None]
+
+
     fig = plt.figure()
     ax = fig.add_subplot(projection='3d')
 
@@ -82,12 +104,39 @@ z_scale_label.place(x=480, y=350)
 z_scale = Entry(root, width=10)
 z_scale.place(x=530, y=350)
 
-#quit button
-button_quit = Button(root, text="Exit", command=exit)
-button_quit.place(x=0, y=0)
+def myClick():
+    e.get()
+
+
+#menu bar
+my_menu = Menu(root)
+
+root.config(menu=my_menu)
+
+def our_command():
+    pass
+file_menu = Menu(my_menu)
+
+my_menu.add_cascade(label="File", menu=file_menu) #File option
+
+file_menu.add_command(label="New...", command=our_command)
+file_menu.add_separator()#Creates bar
+file_menu.add_command(label="Exit",command=exit)
+
+#create and edit menu item.
+edit_menu = Menu(my_menu)
+my_menu.add_cascade(label='Settings', menu = edit_menu)
+edit_menu.add_command(label='Settings1', command=our_command)
+edit_menu.add_command(label='Settings2', command=root.quit)
 
 #Slice button
 Slice = Button(root, text="Slice",padx = 15, pady = 5, command=myClick, fg= "blue", bg = "white")
 Slice.place(x=365, y=450)
+
+#upload button
+
+
+# display_3d()
+
 
 root.mainloop()
