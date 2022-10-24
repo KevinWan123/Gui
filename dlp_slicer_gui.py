@@ -67,6 +67,22 @@ def open_file():
     # Position image on button
     Button(root, image = photoimage,).place(relx= 0.5, rely= 100/wHeight, anchor=CENTER)
 
+#slice functionality
+def myClick():
+    zip_window = Toplevel(root)
+    zip_window.geometry("780x200")
+
+    zip_label = Label(zip_window, text="Enter file name: ")
+    zip_label.place(relx= 0.165, rely = 0.5, anchor=CENTER)
+    zip_input = Entry(zip_window)
+    zip_input.place(relx= 0.3, rely = 0.5, anchor=CENTER)
+
+    dpi_label = Label(zip_window, text="Enter DPI: ")
+    dpi_label.place(relx= 0.695, rely = 0.5, anchor=CENTER)
+    dpi_input = Entry(zip_window)
+    dpi_input.place(relx= 0.81, rely = 0.5, anchor=CENTER)
+
+    e.get()
 
 # #Input boxes and labels for width, x-scale, height, y-scale, slices, and z-scale
 width_label = Label(root, text="Width: ")
@@ -98,10 +114,6 @@ z_scale_label = Label(root, text="Z-Scale: ")
 z_scale_label.place(relx=0.55, rely=250/wHeight, anchor=CENTER)
 z_scale = Entry(root, width=10)
 z_scale.place(relx=0.58, rely=250/wHeight, anchor=CENTER)
-
-def myClick():
-    e.get()
-
 
 # #menu bar
 my_menu = Menu(root)
