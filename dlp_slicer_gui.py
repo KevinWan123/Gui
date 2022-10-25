@@ -1,5 +1,6 @@
 from gettext import npgettext
 from tkinter import *
+from tkinter.ttk import Progressbar
 import tkinter
 import numpy as np
 import matplotlib.pyplot as plt
@@ -9,6 +10,7 @@ from matplotlib.figure import Figure
 from tkinter.filedialog import askopenfile 
 from PIL import ImageTk, Image
 from createImage import *
+import time
 
 
 
@@ -20,8 +22,10 @@ wHeight = 500
 myLabel = Label(text= "DLP Slicer")
 myLabel.place(relx=0.5, rely= 15/wHeight, anchor=CENTER)
 
-file = None
 
+
+file = None
+zip_window = None
 
 #Contains features for the exit window
 def exit():
@@ -69,6 +73,11 @@ def open_file():
 
 #slice functionality
 def myClick():
+    #disable the slice button when the slice button is clicked
+    if Slice["state"] == "normal":
+        Slice["state"] = "disabled"
+
+    global zip_window
     zip_window = Toplevel(root)
     zip_window.geometry("780x200")
 
@@ -82,7 +91,33 @@ def myClick():
     dpi_input = Entry(zip_window)
     dpi_input.place(relx= 0.81, rely = 0.5, anchor=CENTER)
 
+    slice_button2 = Button(zip_window, text="Slice", padx=20, pady=0, command=progressbar)
+    slice_button2.place(relx=0.5, rely=0.6, anchor=CENTER)
+
+    zip_window.protocol('WM_DELETE_WINDOW', enable_slice)
     e.get()
+
+#progress bar
+def progressbar():
+    pb1 = Progressbar(zip_window, orient=HORIZONTAL, length=300, mode='determinate')
+    pb1.place(relx=0.5, rely=0.8, anchor=CENTER)
+
+    zip_window.update_idletasks()
+    pb1['value'] += 50
+    time.sleep(1)
+
+    zip_window.update_idletasks()
+    pb1['value'] += 50
+    time.sleep(1)
+
+    pb1.destroy()
+    slice_complete = Label(zip_window, text='Slicing has been completed!', foreground='green')
+    slice_complete.place(relx=0.5, rely=0.9, anchor=CENTER)
+
+#function to re-enable the slice button
+def enable_slice():
+    Slice["state"] = "normal"
+    zip_window.destroy()
 
 # #Input boxes and labels for width, x-scale, height, y-scale, slices, and z-scale
 width_label = Label(root, text="Width: ")
