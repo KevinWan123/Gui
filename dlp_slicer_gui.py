@@ -12,7 +12,7 @@ from tkinter.filedialog import askopenfile
 from PIL import ImageTk, Image
 from createImage import *
 import time
-import pygame
+
 from playsound import playsound
 
 root = Tk()
@@ -85,7 +85,7 @@ def open_file():
     
 #slice functionality
 def myClick():
-    playsound(r"C:\Users\kew18011\Documents\GitHub\Gui\ImageSTL\sound.mp3")
+    playsound(r"C:\Users\20kev\OneDrive\Documents\GitHub\Gui\ImageSTL\sound.mp3")
 
     #disable the slice button when the slice button is clicked
     if Slice["state"] == "normal":
