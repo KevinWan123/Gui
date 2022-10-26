@@ -13,7 +13,7 @@ from PIL import ImageTk, Image
 from createImage import *
 import time
 
-from playsound import playsound
+
 
 root = Tk()
 root.title("DLP Slicer")
@@ -85,7 +85,6 @@ def open_file():
     
 #slice functionality
 def myClick():
-    playsound(r"C:\Users\20kev\OneDrive\Documents\GitHub\Gui\ImageSTL\sound.mp3")
 
     #disable the slice button when the slice button is clicked
     if Slice["state"] == "normal":
@@ -141,21 +140,21 @@ voxel = Entry(root, width=10, text=v1)
 voxel.place(relx=0.42, rely = 200/wHeight, anchor=CENTER)
 
 v2 = IntVar()
-v2.set(100)
+v2.set(1)
 x_scale_label = Label(root, text="X-Scale: ")
 x_scale_label.place(relx=0.39, rely=250/wHeight, anchor=CENTER)
 x_scale = Entry(root, width=10, text=v2)
 x_scale.place(relx=0.42, rely = 250/wHeight, anchor=CENTER)
 
 v3 = IntVar()
-v3.set(100)
+v3.set(1)
 pitch_label = Label(root, text="Pitch: ")
 pitch_label.place(relx=0.474, rely=200/wHeight, anchor=CENTER)
 pitch = Entry(root, width=10, text=v3)
 pitch.place(relx=0.5, rely = 200/wHeight, anchor=CENTER)
 
 v4 = IntVar()
-v4.set(100)
+v4.set(1)
 y_scale_label = Label(root, text="Y-Scale: ")
 y_scale_label.place(relx=0.47, rely=250/wHeight, anchor=CENTER)
 y_scale = Entry(root, width=10, text=v4)
@@ -169,7 +168,7 @@ slices = Entry(root, width=10, text=v5)
 slices.place(relx=0.58, rely=200/wHeight, anchor=CENTER)
 
 v6 = IntVar()
-v6.set(100)
+v6.set(1)
 z_scale_label = Label(root, text="Z-Scale: ")
 z_scale_label.place(relx=0.55, rely=250/wHeight, anchor=CENTER)
 z_scale = Entry(root, width=10, text=v6)
