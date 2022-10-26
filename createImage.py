@@ -59,4 +59,4 @@ start = timer()
 
 #stlImage()
 end = timer()
-print(end-start)
+print((end-start) * 10000000)

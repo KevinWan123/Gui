@@ -2,6 +2,7 @@ from gettext import npgettext
 from tkinter import *
 from tkinter.ttk import Progressbar
 import tkinter
+from winsound import PlaySound
 import numpy as np
 import matplotlib.pyplot as plt
 import trimesh as trimesh
@@ -11,8 +12,8 @@ from tkinter.filedialog import askopenfile
 from PIL import ImageTk, Image
 from createImage import *
 import time
-
-
+import pygame
+from playsound import playsound
 
 root = Tk()
 root.title("DLP Slicer")
@@ -23,6 +24,14 @@ myLabel = Label(text= "DLP Slicer")
 myLabel.place(relx=0.5, rely= 15/wHeight, anchor=CENTER)
 
 
+# Create a photoimage object of the image in the path
+photo = PhotoImage(file = "./ImageSTL/defaultimage.png")
+
+# Resize image to fit on button
+photoimage = photo.subsample(2, 2)
+
+# Position image on button
+desired_image = Button(root, image = photoimage,).place(relx= 0.5, rely= 100/wHeight, anchor=CENTER)
 
 file = None
 zip_window = None
@@ -69,14 +78,18 @@ def open_file():
     photoimage = photo.subsample(2, 2)
 
     # Position image on button
-    Button(root, image = photoimage,).place(relx= 0.5, rely= 100/wHeight, anchor=CENTER)
+    global desired_image
+    desired_image = Button(root, image = photoimage,).place(relx= 0.5, rely= 100/wHeight, anchor=CENTER)
 
+
+    
 #slice functionality
 def myClick():
+    playsound(r"C:\Users\kew18011\Documents\GitHub\Gui\ImageSTL\sound.mp3")
+
     #disable the slice button when the slice button is clicked
     if Slice["state"] == "normal":
         Slice["state"] = "disabled"
-
     global zip_window
     zip_window = Toplevel(root)
     zip_window.geometry("780x200")
@@ -120,34 +133,46 @@ def enable_slice():
     zip_window.destroy()
 
 # #Input boxes and labels for width, x-scale, height, y-scale, slices, and z-scale
-width_label = Label(root, text="Width: ")
-width_label.place(relx=0.39, rely=200/wHeight, anchor=CENTER)
-width = Entry(root, width=10)
-width.place(relx=0.42, rely = 200/wHeight, anchor=CENTER)
+v1 = IntVar()
+v1.set(100)
+voxel_label = Label(root, text="Voxel size: ")
+voxel_label.place(relx=0.387, rely=200/wHeight, anchor=CENTER)
+voxel = Entry(root, width=10, text=v1)
+voxel.place(relx=0.42, rely = 200/wHeight, anchor=CENTER)
 
+v2 = IntVar()
+v2.set(100)
 x_scale_label = Label(root, text="X-Scale: ")
 x_scale_label.place(relx=0.39, rely=250/wHeight, anchor=CENTER)
-x_scale = Entry(root, width=10)
+x_scale = Entry(root, width=10, text=v2)
 x_scale.place(relx=0.42, rely = 250/wHeight, anchor=CENTER)
 
-height_label = Label(root, text="Height: ")
-height_label.place(relx=0.47, rely=200/wHeight, anchor=CENTER)
-height = Entry(root, width=10)
-height.place(relx=0.5, rely = 200/wHeight, anchor=CENTER)
+v3 = IntVar()
+v3.set(100)
+pitch_label = Label(root, text="Pitch: ")
+pitch_label.place(relx=0.474, rely=200/wHeight, anchor=CENTER)
+pitch = Entry(root, width=10, text=v3)
+pitch.place(relx=0.5, rely = 200/wHeight, anchor=CENTER)
 
+v4 = IntVar()
+v4.set(100)
 y_scale_label = Label(root, text="Y-Scale: ")
 y_scale_label.place(relx=0.47, rely=250/wHeight, anchor=CENTER)
-y_scale = Entry(root, width=10)
+y_scale = Entry(root, width=10, text=v4)
 y_scale.place(relx=0.5, rely = 250/wHeight, anchor=CENTER)
 
+v5 = IntVar()
+v5.set(100)
 slices_label = Label(root, text="Slices: ")
-slices_label.place(relx=0.55, rely=200/wHeight, anchor=CENTER)
-slices = Entry(root, width=10)
+slices_label.place(relx=0.553, rely=200/wHeight, anchor=CENTER)
+slices = Entry(root, width=10, text=v5)
 slices.place(relx=0.58, rely=200/wHeight, anchor=CENTER)
 
+v6 = IntVar()
+v6.set(100)
 z_scale_label = Label(root, text="Z-Scale: ")
 z_scale_label.place(relx=0.55, rely=250/wHeight, anchor=CENTER)
-z_scale = Entry(root, width=10)
+z_scale = Entry(root, width=10, text=v6)
 z_scale.place(relx=0.58, rely=250/wHeight, anchor=CENTER)
 
 # #menu bar
