@@ -98,7 +98,8 @@ def myClick():
     variable.set(options[0]) # default value
 
     w = OptionMenu(zip_window, variable, *options)
-    w.place(relx=0.5, rely=0.75, anchor=CENTER)
+    w.place(relx=0.5, rely=0.35, anchor=CENTER)
+
 
     zip_label = Label(zip_window, text="Enter file name: ")
     zip_label.place(relx= 0.165, rely = 0.5, anchor=CENTER)
@@ -117,9 +118,11 @@ def myClick():
     e.get()
 
 #progress bar
-def progressbar():
+def progressbar():#Where function would be used
     pb1 = Progressbar(zip_window, orient=HORIZONTAL, length=300, mode='determinate')
     pb1.place(relx=0.5, rely=0.8, anchor=CENTER)
+
+    print(v1.get(),v2.get())
 
     zip_window.update_idletasks()
     pb1['value'] += 50
@@ -216,4 +219,5 @@ Slice = Button(root, text="Slice",padx = 15, pady = 5, command=myClick)
 Slice.place(relx=0.5, rely = 300/wHeight, anchor=CENTER)
 
 # #upload button
+print(zip_window)
 root.mainloop()
