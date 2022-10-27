@@ -93,6 +93,13 @@ def myClick():
     zip_window = Toplevel(root)
     zip_window.geometry("780x200")
 
+    options = ["mm", "in", "ft", "m"]
+    variable = StringVar(zip_window)
+    variable.set(options[0]) # default value
+
+    w = OptionMenu(zip_window, variable, *options)
+    w.place(relx=0.5, rely=0.75, anchor=CENTER)
+
     zip_label = Label(zip_window, text="Enter file name: ")
     zip_label.place(relx= 0.165, rely = 0.5, anchor=CENTER)
     zip_input = Entry(zip_window)
